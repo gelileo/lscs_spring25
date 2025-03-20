@@ -1,7 +1,6 @@
 # lscs_spring25
-python course 
-
-This is a some random meaningless change
 
 
-This is added on my local
+Help students learn Python via a maze game.
+
+See [maze](./maze/README.md) for details.
