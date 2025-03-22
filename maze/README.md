@@ -59,7 +59,7 @@ python3 editor.py
 
 Maze editor allows you to create a new maze or make changes to an existing maze.
 
-Be default, it pulls `maze_data1` list from `mazes.py`. Displays it in window. User click on cells to flip it between 'wall' and 'unexplored'.
+By default, it pulls `maze_data1` list from `mazes.py`. Displays it in the window. User clicks on cells to flip it between 'wall' and 'unexplored'.
 
 Once finished, user can click `Export` button to save the result to `mazes.py`.
 
