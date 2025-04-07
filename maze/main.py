@@ -80,17 +80,41 @@ def run_game(screen, clock):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-
             elif event.type == pygame.KEYDOWN:
+                new_pos = player_pos.copy()  # Create a copy of the current position to modify
+
                 if event.key == pygame.K_ESCAPE:
                     running = False
+                elif event.key == pygame.K_UP:
+                    new_pos[0] -= 1
+                elif event.key == pygame.K_DOWN:
+                    new_pos[0] += 1
+                elif event.key == pygame.K_LEFT:
+                    new_pos[1] -= 1
+                elif event.key == pygame.K_RIGHT:
+                    new_pos[1] += 1
 
+                # Ensure the new position stays within the maze boundaries
+                row, col = new_pos
+                if (
+                    0 <= row < len(MAZE1) and
+                    0 <= col < len(MAZE1[0]) and
+                    MAZE1[row][col] == 0  # Ensure it's not a wall
+                ):
+                    player_pos = new_pos
 
         # Clear the screen.
         screen.fill((0, 0, 0))
         
         draw_maze(screen, MAZE1)
         draw_grid(screen)
+
+        #Draw the player (a highlighted rectangle) on top of the maze.
+        player_rect = pygame.Rect(
+            player_pos[1] * CELL_SIZE, player_pos[0] * CELL_SIZE, CELL_SIZE, CELL_SIZE
+        )
+        pygame.draw.rect(screen, colors.FOCUS_COLOR, player_rect)
+
         pygame.display.flip()
 
 
