@@ -94,14 +94,14 @@ def run_game(screen, clock):
                 elif event.key == pygame.K_RIGHT:
                     new_pos[1] += 1
 
-                # Ensure the new position stays within the maze boundaries
-                row, col = new_pos
-                if (
-                    0 <= row < len(MAZE1) and
-                    0 <= col < len(MAZE1[0]) and
-                    MAZE1[row][col] == 0  # Ensure it's not a wall
-                ):
-                    player_pos = new_pos
+            # Ensure the new position stays within the maze boundaries
+            row, col = new_pos
+            if (
+                0 <= row < len(MAZE1) and
+                0 <= col < len(MAZE1[0]) and
+                MAZE1[row][col] == 0  # Ensure it's not a wall
+            ):
+                player_pos = new_pos
 
         # Clear the screen.
         screen.fill((0, 0, 0))
