@@ -8,6 +8,7 @@ from constants import SCREEN_WIDTH, SCREEN_HEIGHT, CELL_SIZE, FPS
 from colors import WALL_COLOR, UNEXPLORED_COLOR, PATH_COLOR, START_COLOR, END_COLOR, GRID_COLOR
 from maze_data import MAZE1, START_POSITION, END_POSITION
 from algorithms.bfs import bfs
+from algorithms.dfs import dfs
 
 def draw_grid(screen):
     rows = len(MAZE1)
@@ -96,7 +97,11 @@ def draw_maze(
 def run_demo(
     screen: pygame.Surface, clock: pygame.time.Clock, algorithm: str = "bfs"
 ) -> None:
-    order_visited, path = bfs(MAZE1, START_POSITION, END_POSITION)
+    # order_visited, path = bfs(MAZE1, START_POSITION, END_POSITION)
+    if algorithm == "bfs":
+        order_visited, path = bfs(MAZE1, START_POSITION, END_POSITION)
+    else:
+        order_visited, path = dfs(MAZE1, START_POSITION, END_POSITION)
 
     current_step = 0
     running = True
@@ -276,11 +281,11 @@ def main():
         help="Choose the algorithm for demo mode",
     )
 
-    parser.add_argument(
-        "--step_by_step",
-        action="store_true",
-        help="If set, run the demo one step at a time",
-    )
+    # parser.add_argument(
+    #     "--step_by_step",
+    #     action="store_true",
+    #     help="If set, run the demo one step at a time",
+    # )
     args = parser.parse_args()
 
     pygame.init()
@@ -289,7 +294,16 @@ def main():
     clock = pygame.time.Clock()
 
     # run_demo(screen, clock)
-    run_interactive(screen, clock)
+    # run_interactive(screen, clock)
+
+    if args.mode == "demo":
+        # if args.step_by_step:
+        #     run_demo_step_by_step(screen, clock, algorithm=args.algo)
+        # else:
+        run_demo(screen, clock, algorithm=args.algo)
+    else:
+        run_interactive(screen, clock)
+
     pygame.quit()
     sys.exit()
 
